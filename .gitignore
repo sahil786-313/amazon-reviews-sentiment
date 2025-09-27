@@ -1,0 +1,19 @@
+# Ignore Kaggle API key
+kaggle.json
+
+# Ignore dataset files (not needed for deployment)
+*.csv
+*.zip
+*.json
+
+# Ignore Colab/Notebook files
+.ipynb_checkpoints/
+*.ipynb
+
+# Ignore Python cache / system files
+__pycache__/
+*.pyc
+.DS_Store
+
+
+myenv
