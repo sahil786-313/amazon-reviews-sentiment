@@ -46,7 +46,7 @@ def predict_sentiment(text):
     padded_sequence = pad_sequences(sequence, maxlen=100)
     prediction = model.predict(padded_sequence)[0][0]
 
-    sentiment = "Positive" if prediction > 0.5 else "Negative"
+    sentiment = "Positive" if prediction > 0.4 else "Negative"
     return sentiment, float(prediction)
 
 
