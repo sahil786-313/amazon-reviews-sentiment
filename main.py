@@ -9,6 +9,7 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # Force TensorFlow to use CPU
 # Download NLTK stopwords if not already available
 nltk.download("stopwords")
 
