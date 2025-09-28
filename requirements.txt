@@ -1,9 +1,6 @@
-flask
-
+flask==2.3.3
 tensorflow==2.18.0
-numpy
-pandas
-scikit-learn
-gunicorn
-matplotlib
-nltk
+numpy==1.26.0
+nltk==3.9.0
+h5py==3.9.0
+gunicorn==21.2.0
