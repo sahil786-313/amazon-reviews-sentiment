@@ -61,7 +61,7 @@ def predict_sentiment(text):
         return "Negative", 0.5  # or you can return "Negative", 0.5
 
     # 5️⃣ Pad sequence
-    padded_sequence = pad_sequences(sequence, maxlen=100)
+    padded_sequence = pad_sequences(sequence, maxlen=30)
 
     # 6️⃣ Predict
     prediction = model.predict(padded_sequence, verbose=0)[0][0]
