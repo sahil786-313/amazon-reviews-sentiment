@@ -16,9 +16,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # Force TensorFlow to use CPU
 nltk.download("stopwords", download_dir="./nltk_data")
 nltk.data.path.append("./nltk_data")
 
-# tokenizer file check
-if not os.path.exists("tokenizer.pkl"):
-    raise FileNotFoundError("Tokenizer file missing!")
+
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -51,8 +49,8 @@ def predict_sentiment(text):
     """Predicts sentiment for a given text."""
     
     # 1️⃣ Check short positive keywords first
-    if text.lower().strip() in POS_KEYWORDS:
-        return "Positive", 1.0  # return high confidence for keyword
+    if any(word in POS_KEYWORDS for word in text.lower().split()):
+        return "Positive", 1.0
 
     # 2️⃣ Clean text
     text = clean_text(text)
@@ -66,13 +64,13 @@ def predict_sentiment(text):
         return "Negative", 0.5  # or you can return "Negative", 0.5
 
     # 5️⃣ Pad sequence
-    padded_sequence = pad_sequences(sequence, maxlen=30)
+    padded_sequence = pad_sequences(sequence, maxlen=100)
 
     # 6️⃣ Predict
     prediction = model.predict(padded_sequence, verbose=0)[0][0]
 
     # 7️⃣ Return sentiment
-    sentiment = "Positive" if prediction > 0.4 else "Negative"
+    sentiment = "Positive" if prediction > 0.5 else "Negative"
     return sentiment, float(prediction)
 
 
