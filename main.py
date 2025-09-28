@@ -13,7 +13,12 @@ POS_KEYWORDS = {"good", "excellent", "great", "amazing"}
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # Force TensorFlow to use CPU
 # Download NLTK stopwords if not already available
-nltk.download("stopwords")
+nltk.download("stopwords", download_dir="./nltk_data")
+nltk.data.path.append("./nltk_data")
+
+# tokenizer file check
+if not os.path.exists("tokenizer.pkl"):
+    raise FileNotFoundError("Tokenizer file missing!")
 
 # Initialize Flask app
 app = Flask(__name__)

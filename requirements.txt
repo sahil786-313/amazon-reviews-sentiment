@@ -3,7 +3,7 @@ flask
 tensorflow
 numpy
 
-scikit-learn
+
 gunicorn
 
 nltk
