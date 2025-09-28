@@ -9,12 +9,14 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
-POS_KEYWORDS = {"good", "excellent", "great", "amazing"} 
+POS_KEYWORDS = {"good", "excellent", "great", "amazing", "fantastic", "love", "wonderful", "best", "awesome"} 
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # Force TensorFlow to use CPU
 # Download NLTK stopwords if not already available
-nltk.download("stopwords", download_dir="./nltk_data")
-nltk.data.path.append("./nltk_data")
+stop_words = set(stopwords.words("english"))
+ps = PorterStemmer()
+
+
 
 
 
