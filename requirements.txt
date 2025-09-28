@@ -1,19 +1,9 @@
-
-
-Flask==3.1.2
-
-
-h5py==3.14.0
-
-
-matplotlib==3.10.0
-
-nltk==3.9.1
-gunicorn==21.2.0
-pandas==2.2.2
-
-scikit-learn==1.6.1
+flask
 
 tensorflow==2.18.0
-
-numpy==2.0.2
+numpy
+pandas
+scikit-learn
+gunicorn
+matplotlib
+nltk
