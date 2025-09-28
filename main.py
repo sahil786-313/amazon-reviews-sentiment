@@ -9,6 +9,8 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
+POS_KEYWORDS = {"good", "excellent", "great", "amazing"} 
+
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # Force TensorFlow to use CPU
 # Download NLTK stopwords if not already available
 nltk.download("stopwords")
@@ -42,6 +44,11 @@ def clean_text(text):
 # Prediction function
 def predict_sentiment(text):
     """Predicts sentiment for a given text."""
+
+     # 1️⃣ Check short positive keywords first
+    if text.lower().strip() in POS_KEYWORDS:
+        return "Positive"
+
     text = clean_text(text)
     sequence = tokenizer.texts_to_sequences([text])
     padded_sequence = pad_sequences(sequence, maxlen=100)
