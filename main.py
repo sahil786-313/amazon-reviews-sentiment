@@ -44,16 +44,29 @@ def clean_text(text):
 # Prediction function
 def predict_sentiment(text):
     """Predicts sentiment for a given text."""
-
-     # 1️⃣ Check short positive keywords first
+    
+    # 1️⃣ Check short positive keywords first
     if text.lower().strip() in POS_KEYWORDS:
-        return "Positive"
+        return "Positive", 1.0  # return high confidence for keyword
 
+    # 2️⃣ Clean text
     text = clean_text(text)
-    sequence = tokenizer.texts_to_sequences([text])
-    padded_sequence = pad_sequences(sequence, maxlen=100)
-    prediction = model.predict(padded_sequence)[0][0]
 
+    # 3️⃣ Convert to sequence
+    sequence = tokenizer.texts_to_sequences([text])
+
+    # 4️⃣ Handle unknown / empty sequence
+    if len(sequence[0]) == 0:
+        # Word not in tokenizer vocab
+        return "Negative", 0.5  # or you can return "Negative", 0.5
+
+    # 5️⃣ Pad sequence
+    padded_sequence = pad_sequences(sequence, maxlen=100)
+
+    # 6️⃣ Predict
+    prediction = model.predict(padded_sequence, verbose=0)[0][0]
+
+    # 7️⃣ Return sentiment
     sentiment = "Positive" if prediction > 0.4 else "Negative"
     return sentiment, float(prediction)
 
